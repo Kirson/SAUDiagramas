@@ -1,0 +1,1290 @@
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="report.css" type="text/css"/>
+	<title>Use Case Diagram - Enrolamiento</title>
+	<script type="text/javascript" src="report.js"></script>
+	<script type="text/javascript" src="link_popup.js"></script>
+	<script type="text/javascript" src="tooltip.js"></script>
+</head>
+<body style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" onload="initPage();initDiagram();initGridDiagram();">
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_top">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_bottom">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_left">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_right">
+	</div>
+	<canvas width="100" style="position:absolute; z-index:2; visibility:hidden" id="spotlight_c" height="100">
+	</canvas>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesTop">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<a href="#top">
+						<img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>
+				</td>
+				<td>
+					<a href="javascript:clearSpotLightFromOpenSpecButton();">
+						<img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesRight">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<a href="#top">
+						<img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="javascript:clearSpotLightFromOpenSpecButton();">
+						<img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute;z-index:4;visibility:hidden" id="linkPopupMenuLayer">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="linkPopupMenuTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="referenceIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Ref.gif" style="border:none" onclick="movePopupPositionToReferenceIconPosition();resetPopupForReference();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="subdiagramIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Subdiagram.gif" style="border:none" onclick="movePopupPositionToSubdiagramIconPosition();resetPopupForSubdiagram();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="transitorIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Transitor.gif" style="border:none" onclick="movePopupPositionToTransitorIconPosition();resetPopupForTransitor();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="documentationIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Documentation.png" style="border:none" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="HeaderText">
+		SAU	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="HeaderLine1">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine2">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine3">
+			</td>
+		</tr>
+	</table>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="referencedBys">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="referencedBysTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="vplink">
+		<table border="1" cellpadding="0" cellspacing="0" bordercolor="#A9BFD3">
+			<tr>
+				<td>
+					<table border="0" cellpadding="0" width="100%" cellspacing="0">
+						<tr style="background:#DDDDDD">
+							<td style="font-size: 12px;" align="left">
+								<select onchange="vpLinkToggleName()" id="vplink-linkType">
+	<option value="Project Link">Project Link</option>
+	<option value="Page URL">Page URL</option>
+</select>
+							</td>
+							<td style="font-size: 12px;" align="right">
+								<input onclick="javascript: vpLinkToggleName()" id="vplink-checkbox" type="checkbox" />
+								<label for="vplink-checkbox">with Name</label>							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="vplink-text" style="width: 348px; height: 60px; border-color: #7EADD9; outline: none;"></textarea>				</td>
+			</tr>
+		</table>
+	</div>
+	<p class="PageTitle">
+		<span id="PageTitleText">
+			Use Case Diagram - Enrolamiento		</span>
+		<a onclick="javascript: showVpLink('SAU.vpp://diagram/HSgpmOqGAqAADBCc', 'Enrolamiento\nSAU.vpp://diagram/HSgpmOqGAqAADBCc', 'Enrolamiento', this); return false;" style="padding-left: 16px; font-size: 12px" href="#">
+			<img src="../images/icons/link.png" border="0"> link</a>
+	</p>
+	<div style="position: relative; padding-bottom: 20px;">
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: absolute; top: 0; left: 0; z-index: 20;" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),hideLinkPopup(),hideReferencedBys();">
+			<tr>
+				<td>
+<span class="TableContent">Jump to:</span>					<select id="SelectShape" class="TableContent" onChange="scrollWin('diagram', this.value);hideLinkPopup();showSpotLight('diagram', this.value)">
+<option value="">Please select a model element</option>
+<option value="shape|137.0|0.0|991.0|668.0|System_uQSiAuqGAqAADAbB.html|System_uQSiAuqGAqAADAbB.html|sQSiAuqGAqAADAbA" id="optionsQSiAuqGAqAADAbA">System : System</option>
+<option value="shape|75.0|26.0|30.0|60.0|Actor_1NopmOqGAqAADBCs.html|Actor_1NopmOqGAqAADBCs.html|lNopmOqGAqAADBCr" id="optionlNopmOqGAqAADBCr">Usuario : Actor</option>
+<option value="shape|76.0|234.0|30.0|60.0|Actor_rdGzWOqGAqAADBGN.html|Actor_rdGzWOqGAqAADBGN.html|rdGzWOqGAqAADBGM" id="optionrdGzWOqGAqAADBGM">Entidad Certificadora : Actor</option>
+<option value="shape|44.0|355.0|55.0|77.0|Actor_7kiXWOqGAqAADBHc.html|Actor_7kiXWOqGAqAADBHc.html|7kiXWOqGAqAADBHb" id="option7kiXWOqGAqAADBHb">SAU : Actor</option>
+<option value="shape|69.0|585.0|30.0|60.0|Actor_WajPWOqGAqAADBKq.html|Actor_WajPWOqGAqAADBKq.html|WajPWOqGAqAADBKp" id="optionWajPWOqGAqAADBKp">Funcionario Canal Autorizado : Actor</option>
+<option value="shape|920.0|32.0|185.0|68.0|UseCase_Fj_sAuqGAqAADAYN.html|UseCase_Fj_sAuqGAqAADAYN.html|Fj.sAuqGAqAADAYM" id="optionFj.sAuqGAqAADAYM">Enrolamiento con Certificado Digital : Use Case</option>
+<option value="shape|309.0|20.0|174.0|73.0|UseCase_zrYpmOqGAqAADBC3.html|UseCase_zrYpmOqGAqAADBC3.html|TrYpmOqGAqAADBC2" id="optionTrYpmOqGAqAADBC2">Enrolamiento Presencial : Use Case</option>
+<option value="shape|309.0|477.0|174.0|60.0|UseCase_ZfL3WOqGAqAADBIm.html|UseCase_ZfL3WOqGAqAADBIm.html|ZfL3WOqGAqAADBIl" id="optionZfL3WOqGAqAADBIl">Enviar Email con acceso al sistema : Use Case</option>
+<option value="shape|309.0|370.0|174.0|63.0|UseCase_zv_nWOqGAqAADBGy.html|UseCase_zv_nWOqGAqAADBGy.html|zv_nWOqGAqAADBGx" id="optionzv_nWOqGAqAADBGx">Generar XML Ficha Única : Use Case</option>
+<option value="shape|303.0|230.0|180.0|64.0|UseCase_s_ozWOqGAqAADBFO.html|UseCase_s_ozWOqGAqAADBFO.html|s.ozWOqGAqAADBFN" id="options.ozWOqGAqAADBFN">Firma Electrónica : Use Case</option>
+<option value="shape|359.0|593.0|174.0|52.0|UseCase_ctbPWOqGAqAADBK1.html|UseCase_ctbPWOqGAqAADBK1.html|stbPWOqGAqAADBK0" id="optionstbPWOqGAqAADBK0">Verificar información Usuario : Use Case</option>
+</select>				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: relative; top: 24;">
+			<tr>
+				<td>
+					<img id="diagram" src="../images/Enrolamiento.png" usemap="#diagram_map" class="Image" width="1132" height="672"/>
+					<map name="diagram_map">
+<area imageId="diagram" coords="105.0, 49.0, 105.0, 63.0, 309.0, 63.0, 309.0, 49.0" coords2="105.0, 49.0, 105.0, 63.0, 309.0, 63.0, 309.0, 49.0" shape="poly" alt=":Association" id="areadiagram_map__DW6WOqGAqAADBDi" href="Association_DtW6WOqGAqAADBDd.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="389.0, 93.0, 389.0, 230.0, 403.0, 230.0, 403.0, 93.0" coords2="389.0, 93.0, 389.0, 230.0, 403.0, 230.0, 403.0, 93.0" shape="poly" alt=":Include" id="areadiagram_map_S5szWOqGAqAADBFq" href="Include_R_szWOqGAqAADBFo.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="106.0, 255.0, 106.0, 269.0, 303.0, 269.0, 303.0, 255.0" coords2="106.0, 255.0, 106.0, 269.0, 303.0, 269.0, 303.0, 255.0" shape="poly" alt=":Association" id="areadiagram_map_ZDWzWOqGAqAADBGb" href="Association_F1WzWOqGAqAADBGW.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="99.0, 393.0, 99.0, 407.0, 309.0, 407.0, 309.0, 393.0" coords2="99.0, 393.0, 99.0, 407.0, 309.0, 407.0, 309.0, 393.0" shape="poly" alt=":Generic Connector" id="areadiagram_map_KrSXWOqGAqAADBHn" href="GenericConnector_BTSXWOqGAqAADBHm.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="389.0, 294.0, 389.0, 370.0, 403.0, 370.0, 403.0, 294.0" coords2="389.0, 294.0, 389.0, 370.0, 403.0, 370.0, 403.0, 294.0" shape="poly" alt=":Include" id="areadiagram_map_UJ2XWOqGAqAADBH_" href="Include_bh2XWOqGAqAADBH_.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="75.0, 432.0, 75.0, 493.0, 72.0, 493.0, 72.0, 507.0, 75.0, 507.0, 75.0, 510.0, 89.0, 510.0, 89.0, 507.0, 309.0, 507.0, 309.0, 493.0, 89.0, 493.0, 89.0, 432.0" coords2="75.0, 432.0, 75.0, 493.0, 72.0, 493.0, 72.0, 507.0, 75.0, 507.0, 75.0, 510.0, 89.0, 510.0, 89.0, 507.0, 309.0, 507.0, 309.0, 493.0, 89.0, 493.0, 89.0, 432.0" shape="poly" alt=":Generic Connector" id="areadiagram_map_hUv3WOqGAqAADBJB" href="GenericConnector_IEv3WOqGAqAADBJA.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="558.0, 46.0, 558.0, 49.0, 483.0, 49.0, 483.0, 63.0, 558.0, 63.0, 558.0, 394.0, 483.0, 394.0, 483.0, 408.0, 558.0, 408.0, 558.0, 411.0, 572.0, 411.0, 572.0, 408.0, 575.0, 408.0, 575.0, 394.0, 572.0, 394.0, 572.0, 63.0, 575.0, 63.0, 575.0, 49.0, 572.0, 49.0, 572.0, 46.0" coords2="558.0, 46.0, 558.0, 49.0, 483.0, 49.0, 483.0, 63.0, 558.0, 63.0, 558.0, 394.0, 483.0, 394.0, 483.0, 408.0, 558.0, 408.0, 558.0, 411.0, 572.0, 411.0, 572.0, 408.0, 575.0, 408.0, 575.0, 394.0, 572.0, 394.0, 572.0, 63.0, 575.0, 63.0, 575.0, 49.0, 572.0, 49.0, 572.0, 46.0" shape="poly" alt="Hace uso:Constraint" id="areadiagram_map_7U4PWOqGAqAADBJh" href="Constraint_9E4PWOqGAqAADBJg.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="636.0, 26.0, 636.0, 29.0, 483.0, 29.0, 483.0, 43.0, 636.0, 43.0, 636.0, 502.0, 483.0, 502.0, 483.0, 516.0, 636.0, 516.0, 636.0, 519.0, 650.0, 519.0, 650.0, 516.0, 653.0, 516.0, 653.0, 502.0, 650.0, 502.0, 650.0, 43.0, 653.0, 43.0, 653.0, 29.0, 650.0, 29.0, 650.0, 26.0" coords2="636.0, 26.0, 636.0, 29.0, 483.0, 29.0, 483.0, 43.0, 636.0, 43.0, 636.0, 502.0, 483.0, 502.0, 483.0, 516.0, 636.0, 516.0, 636.0, 519.0, 650.0, 519.0, 650.0, 516.0, 653.0, 516.0, 653.0, 502.0, 650.0, 502.0, 650.0, 43.0, 653.0, 43.0, 653.0, 29.0, 650.0, 29.0, 650.0, 26.0" shape="poly" alt="Hace uso:Constraint" id="areadiagram_map_BCSPWOqGAqAADBJ7" href="Constraint_OcSPWOqGAqAADBJ6.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="99.0, 615.0, 99.0, 629.0, 359.0, 629.0, 359.0, 615.0" coords2="99.0, 615.0, 99.0, 629.0, 359.0, 629.0, 359.0, 615.0" shape="poly" alt=":Association" id="areadiagram_map_ExgvWOqGAqAADBLg" href="Association_ohgvWOqGAqAADBLb.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="808.0, 71.0, 807.9677, 74.0, 483.0, 74.0, 483.0, 88.0, 807.8172, 88.0, 802.1828, 612.0, 533.0, 612.0, 533.0, 626.0, 802.0323, 626.0, 802.0, 629.0, 816.0, 629.0, 816.0323, 626.0, 819.0, 626.0, 819.0, 612.0, 816.1828, 612.0, 821.8172, 88.0, 825.0, 88.0, 825.0, 74.0, 821.9677, 74.0, 822.0, 71.0" coords2="808.0, 71.0, 807.9677, 74.0, 483.0, 74.0, 483.0, 88.0, 807.8172, 88.0, 802.1828, 612.0, 533.0, 612.0, 533.0, 626.0, 802.0323, 626.0, 802.0, 629.0, 816.0, 629.0, 816.0323, 626.0, 819.0, 626.0, 819.0, 612.0, 816.1828, 612.0, 821.8172, 88.0, 825.0, 88.0, 825.0, 74.0, 821.9677, 74.0, 822.0, 71.0" shape="poly" alt=":Include" id="areadiagram_map_BKEvWOqGAqAADBLq" href="Include_KSEvWOqGAqAADBLp.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="99.0, 0.0, 98.916664, 3.0, 96.0, 3.0, 96.0, 17.0, 98.52778, 17.0, 98.27778, 26.0, 105.0, 26.0, 105.0, 36.0, 112.0, 36.0, 112.52778, 17.0, 1005.0, 17.0, 1005.0, 32.0, 1019.0, 32.0, 1019.0, 17.0, 1022.0, 17.0, 1022.0, 3.0, 1019.0, 3.0, 1019.0, 0.0, 1005.0, 0.0, 1005.0, 3.0, 112.916664, 3.0, 113.0, 0.0" coords2="99.0, 0.0, 98.916664, 3.0, 96.0, 3.0, 96.0, 17.0, 98.52778, 17.0, 98.27778, 26.0, 105.0, 26.0, 105.0, 36.0, 112.0, 36.0, 112.52778, 17.0, 1005.0, 17.0, 1005.0, 32.0, 1019.0, 32.0, 1019.0, 17.0, 1022.0, 17.0, 1022.0, 3.0, 1019.0, 3.0, 1019.0, 0.0, 1005.0, 0.0, 1005.0, 3.0, 112.916664, 3.0, 113.0, 0.0" shape="poly" alt=":Association" id="areadiagram_map_nP5sAuqGAqAADAYy" href="Association_AX5sAuqGAqAADAYt.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="1005.0, 100.0, 1005.0, 255.0, 483.0, 255.0, 483.0, 269.0, 1005.0, 269.0, 1005.0, 272.0, 1019.0, 272.0, 1019.0, 269.0, 1022.0, 269.0, 1022.0, 255.0, 1019.0, 255.0, 1019.0, 100.0" coords2="1005.0, 100.0, 1005.0, 255.0, 483.0, 255.0, 483.0, 269.0, 1005.0, 269.0, 1005.0, 272.0, 1019.0, 272.0, 1019.0, 269.0, 1022.0, 269.0, 1022.0, 255.0, 1019.0, 255.0, 1019.0, 100.0" shape="poly" alt=":Include" id="areadiagram_map_THtcAuqGAqAADAZY" href="Include_WztcAuqGAqAADAZX.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="1027.0, 100.0, 1027.0, 411.0, 483.0, 411.0, 483.0, 425.0, 1027.0, 425.0, 1027.0, 428.0, 1041.0, 428.0, 1041.0, 425.0, 1044.0, 425.0, 1044.0, 411.0, 1041.0, 411.0, 1041.0, 100.0" coords2="1027.0, 100.0, 1027.0, 411.0, 483.0, 411.0, 483.0, 425.0, 1027.0, 425.0, 1027.0, 428.0, 1041.0, 428.0, 1041.0, 425.0, 1044.0, 425.0, 1044.0, 411.0, 1041.0, 411.0, 1041.0, 100.0" shape="poly" alt=":Include" id="areadiagram_map_z5LcAuqGAqAADAZi" href="Include_qZLcAuqGAqAADAZh.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="1054.0, 100.0, 1054.0, 517.0, 483.0, 517.0, 483.0, 531.0, 1054.0, 531.0, 1054.0, 534.0, 1068.0, 534.0, 1068.0, 531.0, 1071.0, 531.0, 1071.0, 517.0, 1068.0, 517.0, 1068.0, 100.0" coords2="1054.0, 100.0, 1054.0, 517.0, 483.0, 517.0, 483.0, 531.0, 1054.0, 531.0, 1054.0, 534.0, 1068.0, 534.0, 1068.0, 531.0, 1071.0, 531.0, 1071.0, 517.0, 1068.0, 517.0, 1068.0, 100.0" shape="poly" alt="Hace uso:Constraint" id="areadiagram_map_DKg8AuqGAqAADAaF" href="Constraint_z8g8AuqGAqAADAaE.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Normal&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario accede al portal SAU
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario registra CI / RUC
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema consulta si el usuario posee o no certificado digital
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario indica que si posee certificado digital
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema direcciona verificaci&amp;#243;n de validez del certificado a la 
+        entidad certificadora
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        La entidad certificadora certifica la validez del certificado
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa sus datos
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario acepta T&amp;#233;rminos y Condiciones
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU genera formulario XML
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El certificado digital del usuario firma electr&amp;#243;nicamente el 
+        formulario generado en el paso anterior
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU crea el usuario en su repositorio
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU envia email al usuario con el link de activaci&amp;#243;n en el 
+        sistema
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa al portal SAU y registra su contrase&amp;#241;a
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU valida la informaci&amp;#243;n proporcionada por el usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa al sistema
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;nbsp;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Alterno (Usuario no posee certificado digital)&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario accede al portal SAU
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario registra CI / RUC
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema consulta si el usuario posee o no certificado digital
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario no posee certificado digital, es direccionado a la pantalla 
+        de t&amp;#233;rminos y condiciones
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario acepta los t&amp;#233;rminos y condiciones
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario valida datos
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario imprime el formulario de registro del sistema SAU
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario acude al canal autorizado
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El funcionario del canal autorizado ingresa datos del usuario (C&amp;#233;dula 
+        o RUC)
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El funcionario valida informaci&amp;#243;n con formulario de Ficha &amp;#218;nica
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU genera formulario XML
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU firma electr&amp;#243;nicamente el formulario generado en el 
+        paso anterior
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU envia email al usuario con el link de activaci&amp;#243;n en el 
+        sistema
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa al portal SAU y registra su contrase&amp;#241;a
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU valida la informaci&amp;#243;n proporcionada por el usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa al sistema
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="920, 32, 1105, 100" coords2="920, 32, 1105, 100" shape="rect" alt="Enrolamiento con Certificado Digital:Use Case" id="areadiagram_map_Fj.sAuqGAqAADAYM" href="UseCase_Fj_sAuqGAqAADAYN.html" onmouseover="storeReferenceAndSubdiagramInfos('diagram','920, 32, 1105, 100',new Array(),new Array(),new Array(),new Array(),new Array(),new Array('ClassDiagram_KY252OqGAqAADBOm.html/SAU-Clases/ClassDiagram','RequirementDiagram_n5CV2OqGAqAADBR_.html/Enrolamiento Presencial/RequirementDiagram','InteractionDiagram_hoMNAuqGAqAADAq1.html/Enrolamiento con Certificado Digital/InteractionDiagram'),new Array(),new Array(),new Array()),hideReferenceIcon(),showSubdiagramIcon('diagram', '920, 32, 1105, 100'),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Normal&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario ingresa a sistema SAU
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario digita c&amp;#233;dula / RUC del usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario contrasta informaci&amp;#243;n f&amp;#237;sica con formulario impreso del 
+        usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario informa al sistema SAU que la informaci&amp;#243;n del usuario es 
+        correcta y real
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario procede a generar archivo XML con ficha &amp;#250;nica
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Sistema SAU firma electr&amp;#243;nicamente el documento generado.
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario notifica al usuario que el proceso se ha completado 
+        exitosamente.
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Alterno&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario ingresa a sistema SAU
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario digita c&amp;#233;dula / RUC del usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario contrasta informaci&amp;#243;n f&amp;#237;sica con formulario impreso del 
+        usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Funcionario informa al sistema SAU que la informaci&amp;#243;n del usuario es 
+        incorrecta.
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Sistema SAU emitira una alerta notificando posible adulteracion de 
+        identidad del usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El canal autorizado ejecutar&amp;#225; acciones de verificaci&amp;#243;n de acuerdo a 
+        sus pol&amp;#237;ticas internas establecidas para estos casos
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="359, 593, 533, 645" coords2="359, 593, 533, 645" shape="rect" alt="Verificar información Usuario:Use Case" id="areadiagram_map_stbPWOqGAqAADBK0" href="UseCase_ctbPWOqGAqAADBK1.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="69, 585, 99, 645" coords2="69, 585, 99, 645" shape="rect" alt="Funcionario Canal Autorizado:Actor" id="areadiagram_map_WajPWOqGAqAADBKp" href="Actor_WajPWOqGAqAADBKq.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Normal&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Sistema SAU genera email con informaci&amp;#243;n de enlace para activaci&amp;#243;n del 
+        usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Sistema SAU env&amp;#237;a email al usuario
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Alterno&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Email no puede ser generado
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        SAU emite notificaci&amp;#243;n indicando problemas t&amp;#233;cnicos
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="309, 477, 483, 537" coords2="309, 477, 483, 537" shape="rect" alt="Enviar Email con acceso al sistema:Use Case" id="areadiagram_map_ZfL3WOqGAqAADBIl" href="UseCase_ZfL3WOqGAqAADBIm.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="44, 355, 99, 432" coords2="44, 355, 99, 432" shape="rect" alt="SAU:Actor" id="areadiagram_map_7kiXWOqGAqAADBHb" href="Actor_7kiXWOqGAqAADBHc.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Normal&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Sistema SAU valida que informaci&amp;#243;n es correcta
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Sistema SAU genera ficha en formato XML con la informaci&amp;#243;n 
+        proporcionada
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El archivo emito es firmado digitalmente
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;nbsp;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Alterno&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Sistema SAU indica que existen errores en la informaci&amp;#243;n ingresada
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Sistema SAU emite notificaci&amp;#243;n al usuario indicando los errores en la 
+        informaci&amp;#243;n
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="309, 370, 483, 433" coords2="309, 370, 483, 433" shape="rect" alt="Generar XML Ficha Única:Use Case" id="areadiagram_map_zv_nWOqGAqAADBGx" href="UseCase_zv_nWOqGAqAADBGy.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="76, 234, 106, 294" coords2="76, 234, 106, 294" shape="rect" alt="Entidad Certificadora:Actor" id="areadiagram_map_rdGzWOqGAqAADBGM" href="Actor_rdGzWOqGAqAADBGN.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Normal&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Usuario invoca al servicio de firma digital de la entidad certificadora
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El servicio de la entidad certificadora valida las credenciales del 
+        usuario y la vigencia de sus certificados
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Si la validaci&amp;#243;n es correcta, la entidad certificadora retorna la 
+        firma digital solicitada
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;nbsp;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Alterno&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Usuario invoca al servicio de firma digital de la entidad certificadora
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El servicio de la entidad certificadora valida las credenciales del 
+        usuario y la vigencia de sus certificados
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        Si la validaci&amp;#243;n falla, la entidad certificadora retorna error 
+        indicando los motivos por los cuales el certificado no pudo ser 
+        firmado, esto es o por credenciales o por vigencia del certificado.
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="303, 230, 483, 294" coords2="303, 230, 483, 294" shape="rect" alt="Firma Electrónica:Use Case" id="areadiagram_map_s.ozWOqGAqAADBFN" href="UseCase_s_ozWOqGAqAADBFO.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Normal&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario accede al portal SAU
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario registra CI / RUC
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema consulta si el usuario posee o no certificado digital
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario no posee certificado digital, es direccionado a la pantalla 
+        de t&amp;#233;rminos y condiciones
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario acepta los t&amp;#233;rminos y condiciones
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario valida datos
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario imprime el formulario de registro del sistema SAU
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario acude al canal autorizado
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El funcionario del canal autorizado ingresa datos del usuario (C&amp;#233;dula 
+        o RUC)
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El funcionario valida informaci&amp;#243;n con formulario de Ficha &amp;#218;nica
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU genera formulario XML
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU firma electr&amp;#243;nicamente el formulario generado en el 
+        paso anterior
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU envia email al usuario con el link de activaci&amp;#243;n en el 
+        sistema
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa al portal SAU y registra su contrase&amp;#241;a
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU valida la informaci&amp;#243;n proporcionada por el usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa al sistema
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;nbsp;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;Flujo Alterno (Usuario posee certificado digital)&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      
+    &amp;lt;/p&amp;gt;
+    &amp;lt;ol class=&amp;quot;decimal&amp;quot; margin-left-ltr=&amp;quot;50&amp;quot; margin-right-rtl=&amp;quot;50&amp;quot; style=&amp;quot;margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;&amp;quot;&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario accede al portal SAU
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario registra CI / RUC
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema consulta si el usuario posee o no certificado digital
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario si posee certificado digital
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU le pide al usuario ingresar los datos del certificado 
+        digital
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU envia los datos del certificado a la entidad 
+        certificadora.
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        La entidad certificadora valida los datos y vigencia del certificado
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El certificado es validado
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario valida su informaci&amp;#243;n
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario firma electr&amp;#243;nicamente el formulario generado
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU envia email al usuario con el link de activaci&amp;#243;n en el 
+        sistema
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa al portal SAU y registra su contrase&amp;#241;a
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa el OTP proporcionado por el sistema
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El sistema SAU valida la informaci&amp;#243;n proporcionada por el usuario
+      &amp;lt;/li&amp;gt;
+      &amp;lt;li style=&amp;quot;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;&amp;quot;&amp;gt;
+        El usuario ingresa al sistema &amp;nbsp; &amp;nbsp;
+      &amp;lt;/li&amp;gt;
+    &amp;lt;/ol&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="309, 20, 483, 93" coords2="309, 20, 483, 93" shape="rect" alt="Enrolamiento Presencial:Use Case" id="areadiagram_map_TrYpmOqGAqAADBC2" href="UseCase_zrYpmOqGAqAADBC3.html" onmouseover="storeReferenceAndSubdiagramInfos('diagram','309, 20, 483, 93',new Array(),new Array(),new Array(),new Array(),new Array(),new Array('InteractionDiagram_UaKV2OqGAqAADBSC.html/Enrolamiento Presencial/InteractionDiagram'),new Array(),new Array(),new Array()),hideReferenceIcon(),showSubdiagramIcon('diagram', '309, 20, 483, 93'),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="75, 26, 105, 86" coords2="75, 26, 105, 86" shape="rect" alt="Usuario:Actor" id="areadiagram_map_lNopmOqGAqAADBCr" href="Actor_1NopmOqGAqAADBCs.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="137, 0, 1128, 668" coords2="137, 0, 1128, 668" shape="rect" alt="System:System" id="areadiagram_map_sQSiAuqGAqAADAbA" href="System_uQSiAuqGAqAADAbB.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+</map>
+				</td>
+			</tr>
+		</table>
+		<p>
+		</p>
+	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="Category">
+				Model Elements			</td>
+		</tr>
+		<tr>
+			<td style="height: 5px">
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td colSpan="4" class="TableHeaderLine">
+			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine1">
+			</td>
+		</tr>
+		<tr class="TableHeader">
+			<td class="TableCellSpaceHolder10Px">
+			</td>
+			<td width="30%">
+<span class="TableHeaderText">Name</span>			</td>
+			<td class="TableCellSpaceHolder20Px">
+			</td>
+			<td>
+<span class="TableHeaderText">Description</span>			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine2">
+			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/System.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/System.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="System_uQSiAuqGAqAADAbB.html" class="ItemLink">System : System</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Actor.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Actor.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Actor_1NopmOqGAqAADBCs.html" class="ItemLink">Usuario : Actor</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Actor.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Actor.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Actor_rdGzWOqGAqAADBGN.html" class="ItemLink">Entidad Certificadora : Actor</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Actor.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Actor.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Actor_7kiXWOqGAqAADBHc.html" class="ItemLink">SAU : Actor</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Actor.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Actor.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Actor_WajPWOqGAqAADBKq.html" class="ItemLink">Funcionario Canal Autorizado : Actor</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_Fj_sAuqGAqAADAYN.html" class="ItemLink">Enrolamiento con Certificado Digital : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      <b>Flujo Normal</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario accede al portal SAU
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario registra CI / RUC
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema consulta si el usuario posee o no certificado digital
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario indica que si posee certificado digital
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema direcciona verificaci&#243;n de validez del certificado a la 
+        entidad certificadora
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        La entidad certificadora certifica la validez del certificado
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa sus datos
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario acepta T&#233;rminos y Condiciones
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU genera formulario XML
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El certificado digital del usuario firma electr&#243;nicamente el 
+        formulario generado en el paso anterior
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU crea el usuario en su repositorio
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU envia email al usuario con el link de activaci&#243;n en el 
+        sistema
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa al portal SAU y registra su contrase&#241;a
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU valida la informaci&#243;n proporcionada por el usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa al sistema
+      </li>
+    </ol>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      &nbsp;
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      <b>Flujo Alterno (Usuario no posee certificado digital)</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario accede al portal SAU
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario registra CI / RUC
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema consulta si el usuario posee o no certificado digital
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario no posee certificado digital, es direccionado a la pantalla 
+        de t&#233;rminos y condiciones
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario acepta los t&#233;rminos y condiciones
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario valida datos
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario imprime el formulario de registro del sistema SAU
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario acude al canal autorizado
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El funcionario del canal autorizado ingresa datos del usuario (C&#233;dula 
+        o RUC)
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El funcionario valida informaci&#243;n con formulario de Ficha &#218;nica
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU genera formulario XML
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU firma electr&#243;nicamente el formulario generado en el 
+        paso anterior
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU envia email al usuario con el link de activaci&#243;n en el 
+        sistema
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa al portal SAU y registra su contrase&#241;a
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU valida la informaci&#243;n proporcionada por el usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa al sistema
+      </li>
+    </ol>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_zrYpmOqGAqAADBC3.html" class="ItemLink">Enrolamiento Presencial : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      <b>Flujo Normal</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario accede al portal SAU
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario registra CI / RUC
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema consulta si el usuario posee o no certificado digital
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario no posee certificado digital, es direccionado a la pantalla 
+        de t&#233;rminos y condiciones
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario acepta los t&#233;rminos y condiciones
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario valida datos
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario imprime el formulario de registro del sistema SAU
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario acude al canal autorizado
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El funcionario del canal autorizado ingresa datos del usuario (C&#233;dula 
+        o RUC)
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El funcionario valida informaci&#243;n con formulario de Ficha &#218;nica
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU genera formulario XML
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU firma electr&#243;nicamente el formulario generado en el 
+        paso anterior
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU envia email al usuario con el link de activaci&#243;n en el 
+        sistema
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa al portal SAU y registra su contrase&#241;a
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU valida la informaci&#243;n proporcionada por el usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa al sistema
+      </li>
+    </ol>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      &nbsp;
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      <b>Flujo Alterno (Usuario posee certificado digital)</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario accede al portal SAU
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario registra CI / RUC
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema consulta si el usuario posee o no certificado digital
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario si posee certificado digital
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU le pide al usuario ingresar los datos del certificado 
+        digital
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU envia los datos del certificado a la entidad 
+        certificadora.
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        La entidad certificadora valida los datos y vigencia del certificado
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El certificado es validado
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario valida su informaci&#243;n
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario firma electr&#243;nicamente el formulario generado
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU envia email al usuario con el link de activaci&#243;n en el 
+        sistema
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa al portal SAU y registra su contrase&#241;a
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa el OTP proporcionado por el sistema
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El sistema SAU valida la informaci&#243;n proporcionada por el usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El usuario ingresa al sistema &nbsp; &nbsp;
+      </li>
+    </ol>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_ZfL3WOqGAqAADBIm.html" class="ItemLink">Enviar Email con acceso al sistema : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      <b>Flujo Normal</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Sistema SAU genera email con informaci&#243;n de enlace para activaci&#243;n del 
+        usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Sistema SAU env&#237;a email al usuario
+      </li>
+    </ol>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      <b>Flujo Alterno</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Email no puede ser generado
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        SAU emite notificaci&#243;n indicando problemas t&#233;cnicos
+      </li>
+    </ol>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_zv_nWOqGAqAADBGy.html" class="ItemLink">Generar XML Ficha Única : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      <b>Flujo Normal</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Sistema SAU valida que informaci&#243;n es correcta
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Sistema SAU genera ficha en formato XML con la informaci&#243;n 
+        proporcionada
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El archivo emito es firmado digitalmente
+      </li>
+    </ol>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      &nbsp;
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      <b>Flujo Alterno</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Sistema SAU indica que existen errores en la informaci&#243;n ingresada
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Sistema SAU emite notificaci&#243;n al usuario indicando los errores en la 
+        informaci&#243;n
+      </li>
+    </ol>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_s_ozWOqGAqAADBFO.html" class="ItemLink">Firma Electrónica : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      <b>Flujo Normal</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Usuario invoca al servicio de firma digital de la entidad certificadora
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El servicio de la entidad certificadora valida las credenciales del 
+        usuario y la vigencia de sus certificados
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Si la validaci&#243;n es correcta, la entidad certificadora retorna la 
+        firma digital solicitada
+      </li>
+    </ol>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      &nbsp;
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      <b>Flujo Alterno</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Usuario invoca al servicio de firma digital de la entidad certificadora
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El servicio de la entidad certificadora valida las credenciales del 
+        usuario y la vigencia de sus certificados
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Si la validaci&#243;n falla, la entidad certificadora retorna error 
+        indicando los motivos por los cuales el certificado no pudo ser 
+        firmado, esto es o por credenciales o por vigencia del certificado.
+      </li>
+    </ol>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_ctbPWOqGAqAADBK1.html" class="ItemLink">Verificar información Usuario : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;margin-right:0;font-weight:normal;font-size:11px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      <b>Flujo Normal</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario ingresa a sistema SAU
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario digita c&#233;dula / RUC del usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario contrasta informaci&#243;n f&#237;sica con formulario impreso del 
+        usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario informa al sistema SAU que la informaci&#243;n del usuario es 
+        correcta y real
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario procede a generar archivo XML con ficha &#250;nica
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Sistema SAU firma electr&#243;nicamente el documento generado.
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario notifica al usuario que el proceso se ha completado 
+        exitosamente.
+      </li>
+    </ol>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      <b>Flujo Alterno</b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0;margin-bottom:.0001pt;">
+      
+    </p>
+    <ol class="decimal" margin-left-ltr="50" margin-right-rtl="50" style="margin-left:40pt;list-style-type:none;margin-top:0px;margin-bottom:0px;">
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario ingresa a sistema SAU
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario digita c&#233;dula / RUC del usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario contrasta informaci&#243;n f&#237;sica con formulario impreso del 
+        usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Funcionario informa al sistema SAU que la informaci&#243;n del usuario es 
+        incorrecta.
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        Sistema SAU emitira una alerta notificando posible adulteracion de 
+        identidad del usuario
+      </li>
+      <li style="margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;">
+        El canal autorizado ejecutar&#225; acciones de verificaci&#243;n de acuerdo a 
+        sus pol&#237;ticas internas establecidas para estos casos
+      </li>
+    </ol>
+  </body></span>			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="TableCellSpaceHolder1PxTall">
+			</td>
+		</tr>
+		<tr>
+			<td class="TableFooter">
+			</td>
+		</tr>
+	</table>
+	<div style="height: 20px">
+	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="FooterLine">
+			</td>
+		</tr>
+	</table>
+	<div class="HeaderText">
+		SAU	</div>
+</body>
+</html>
